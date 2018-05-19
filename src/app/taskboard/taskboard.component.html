@@ -1,0 +1,31 @@
+<div class="board">
+    <!-- Notify -->
+    <div class="notify">
+        <span *ngIf="compSaveState">
+            Your task saved successfully!
+        </span>
+    </div>
+
+    <!-- Add click event binding for this button... -->
+    <button type="button" style="margin: 20px 0"
+            (click)="handleClickNewTask()">
+        
+        <ng-template *ngIf="!cssShowHideTaskForm; then thenBlockBtnText; else elseBlockBtnText"></ng-template>    
+        <ng-template #thenBlockBtnText>New task</ng-template>
+        <ng-template #elseBlockBtnText>Close</ng-template>
+    </button>
+
+    <!-- Using callback function to get outSaveState from taskform component-->
+    <app-taskform [style.display]="cssShowHideTaskForm ? '' : 'none'"
+                    (outSaveState)="receiveSaveState($event)">
+    </app-taskform>
+
+    <div class="lists">
+        <!-- Markup for task lists here... -->
+        <div *ngFor="let statusType of compStatusTypes">
+            <app-tasklist [taskStatus]="statusType" 
+                            [taskList]="filterTaskList(statusType, taskList)">
+            </app-tasklist>
+        </div>     
+    </div>
+</div>

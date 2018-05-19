@@ -1,0 +1,27 @@
+<div class="task">
+    <div class="header">
+        <div>
+          <!-- Render title here... -->
+          <p>{{task.title}}</p>
+        </div>
+
+        <!-- Markup for dropdown menu here... -->
+        <select name="" id="" (change)="handleChange(task.id, $event.target.value)">
+            <option *ngFor="let statusType of compStatusTypes" 
+                value="{{statusType}}"
+                [selected]="statusType === taskStatus">
+                {{statusType}}
+            </option>
+        </select>
+    </div>
+    <hr>
+    <div class="body">
+        <!-- Render description here... -->
+        {{task.description}}
+        <div class="delete-task-footer">
+            <img src="assets/remove.png" alt="Remove task" title="Remove task" 
+                (click)="handleDeleteTask(task.id)" class="delete-task-icon" text>
+        </div>
+    </div>
+</div>
+
